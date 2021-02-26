@@ -1,0 +1,8 @@
+<h1>{{ book.nom }}</h1>
+<ul>
+    <li>Auteur : {{ book.auteur }}</li>
+    <li>ISBN : {{ book.ISBN }}</li>
+</ul>
+    <p>{{ book.resume }}</p>
+
+    <a href="{% url 'biblio:index' %}">Retour</a>
