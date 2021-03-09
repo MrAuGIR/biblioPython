@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row my-5">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>resume</th>
+                    <th>isbn</th>
+                    <th>authors</th>
+                    <th>Edition</th>
+                    <th>categories</th>
+                    <th>image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{book.nom}}</td>
+                    <td>{{book.resume}}</td>
+                    <td>{{book.ISBN}}</td>
+                    <td>{{book.autheurs}}</td>
+                    <td>{{book.edition}}</td>
+                    <td>{{book.genre}}</td>
+                    <td><img src="{{book.image}}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+    </div>
+</div>
+    
+{% endblock body %}

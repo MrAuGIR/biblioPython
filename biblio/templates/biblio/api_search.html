@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form}}
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+{% if data %}
+    <div class="row">
+        <div class="col-12">
+            {{data}}
+            
+        </div>
+    </div>
+{% endif %}
+    
+</div>
+
+
+{% endblock %}

@@ -7,13 +7,14 @@
               
                     {% for book in book_list %}
                     <div class="col-4">
-                        <div class="card">
+                        <div class="card my-3" style="min-height: 50vh;">
                             <div class="picture" style="height: 150px;">
-                                <img src="/media/{{book.image}}" class="card-img-top" style="height:100%;object-fit:cover" alt="img">
+                                {# <img src="/media/{{book.image}}" class="card-img-top" style="height:100%;object-fit:cover" alt="img"> #}
+                                <img src="{{book.image}}" class="card-img-top" style="height:100%;object-fit:cover" alt="img">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{book.nom}}</h5>
-                                <p class="card-text">{{book.resume}}</p>
+                                <p class="card-text">{{book.resume |slice:":150"}}</p>
                                 <a href="{% url 'biblio:detail' book.id %}" class="btn btn-primary">Go somewhere</a>
                             </div>
                         </div>

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Book, Auteur, Genre, Edition
-import csv
+from .form import UploadFileForm, SearchBookForm
+import csv, io
+import requests
 
 # Create your views here.
 
@@ -42,3 +45,60 @@ def imports(request):
     if request.method == 'POST':
         file = request.POST
     return render(request, 'biblio/imports.html', {'imports':imports} )
+
+@login_required(login_url="/admin")
+def upload_file(request):
+
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            csv_file = request.FILES['file']
+            data_set = csv_file.read().decode('UTF-8')
+            io_string = io.StringIO(data_set)
+            next(io_string)
+
+            books_list= []
+            for row in csv.reader(io_string, delimiter=';', quotechar='"'):
+                
+                edition = Edition.objects.create(nom='Gallimard')
+                genre = Genre.objects.create(nom=row[5])
+                auteurs = Auteur.objects.create(nom=row[3],prenom="John")
+
+                book = Book.objects.create(nom=row[0],resume=row[1],ISBN=row[2],edition=edition,image_url=row[6])
+                if book:
+                    book.genres.add(genre)
+                    book.auteurs.add(auteurs)
+                
+                books_list.append(book)
+
+            return render(request, "biblio/csv.html", {"result": True, 'books': books_list})
+    else:
+        form = UploadFileForm()
+    return render(request, 'biblio/csv2.html', {'form': form})
+    
+
+def api_search(request):
+
+    url = 'https://www.googleapis.com/books/v1/volumes?'
+
+    if request.method == 'POST':
+        form = SearchBookForm(request.POST)
+
+        if form.is_valid():
+            result = form.cleaned_data['title']
+            params = dict(q=result)
+
+            resp = requests.get(url=url, params=params)
+            data = resp.json()
+            # book_data = data['items'][0]['volumeInfo']
+            # title = book_data['title']
+            # authors = 
+            return render(request, 'biblio/api_search.html', {'form':form, 'data':data})
+
+    else:
+        form = SearchBookForm()
+    return render(request, 'biblio/api_search.html', {'form': form})
+
+    

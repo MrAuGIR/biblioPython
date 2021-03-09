@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row my-5">
+        {% if not result %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{form}}
+                </div>
+                <button class="btn btn-primary" type="submit">Upload</button>
+            </form>
+        {% else %}
+            <p>Import terminé !</p>
+        {% endif %}
+    </div>
+</div>
+    
+{% endblock body %}

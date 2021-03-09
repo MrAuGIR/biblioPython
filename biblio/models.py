@@ -26,9 +26,18 @@ class Book(models.Model):
     auteurs = models.ManyToManyField(Auteur)
     genres = models.ManyToManyField(Genre)
     edition = models.ForeignKey(Edition, on_delete=models.DO_NOTHING)
-    image = models.ImageField(upload_to='../media/image')
+    image_file = models.ImageField(blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)
     resume = models.TextField()
     ISBN = models.CharField(max_length=13)
+
+
+    @property
+    def image(self):
+        img = self.image_url
+        if self.image_file:
+            img = self.image_file.url
+        return img
 
 
 

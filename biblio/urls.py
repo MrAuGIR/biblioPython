@@ -13,6 +13,8 @@ urlpatterns = [
     path('authors/', views.authors, name="authors"),
     path('genres/', views.genres, name="genres"),
     path('editions/', views.editions, name="editions"),
-    path('imports/',views.imports, name="imports")
+    path('imports/',views.imports, name="imports"),
+    path('csv2/',views.upload_file, name="csv2"),
+    path('apibook/',views.api_search, name="api_search")
     
 ]
