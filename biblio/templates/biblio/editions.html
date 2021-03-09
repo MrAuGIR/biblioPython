@@ -3,14 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                {% if authors %}
+                {% if editions %}
                 <ul class="list-group">
-                    {% for author in authors %}
-                    <li class="list-group-item"><a href="{% url 'biblio:author_detail' author.id %}">{{ author.nom}}</a></li>
+                    {% for edition in editions %}
+                    <li class="list-group-item"><a href="{% url 'biblio:edition_detail' edition.id %}">{{ edition.nom}}</a></li>
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p>Author are no available.</p>
+                <p>Edition are no available.</p>
                 {% endif %}
             </div>
         </div>

@@ -3,9 +3,9 @@
 <div class="container">
     <div class="row my-5">
         <div class="col-12">
-            <h1>Les livres pour l'auteur :{{ author.nom }}</h1>
+            <h1>Les livres pour l'édition' :{{ edition.nom }}</h1>
         </div>
-            {% for book in author.book_set.all %}
+            {% for book in edition.book_set.all %}
             <div class="col-4">
                 <div class="card">
                     <div class="picture" style="height: 150px;">
@@ -21,7 +21,7 @@
             {% endfor %}
     </div>
     <div class="row">
-        <a href="{% url 'biblio:index' %}">Retour</a>
+        <a href="{% url 'biblio:index' %}">Retour index</a>
     </div>
 </div>
 

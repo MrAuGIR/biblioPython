@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 {% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-12">
+        <div class="row my-5">
+            
                 {% if book_list %}
-                <ul>
+              
                     {% for book in book_list %}
-                    <li><strong>{{book.nom}}</strong></li>
-                    <li><a href="{% url 'biblio:detail' book.id %}">{{ book.resume }}</a></li>
-                    <img style="height:100px"src="/media/{{book.image}}">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="picture" style="height: 150px;">
+                                <img src="/media/{{book.image}}" class="card-img-top" style="height:100%;object-fit:cover" alt="img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{book.nom}}</h5>
+                                <p class="card-text">{{book.resume}}</p>
+                                <a href="{% url 'biblio:detail' book.id %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
                 {% else %}
                 <p>No book are available.</p>
                 {% endif %}
-            </div>
         </div>
     </div>
 
