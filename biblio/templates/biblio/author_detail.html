@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row my-5">
+        <h1>{{ author.nom }}</h1>
+            {% for book in author.book_set.all %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="picture" style="height: 150px;">
+                        <img src="/media/{{book.image}}" class="card-img-top" style="height:100%;object-fit:cover" alt="img">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{book.nom}}</h5>
+                        <p class="card-text">{{book.resume}}</p>
+                        <a href="{% url 'biblio:detail' book.id %}" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+    <div class="row">
+        <a href="{% url 'biblio:index' %}">Retour</a>
+    </div>
+</div>
+
+    
+{% endblock %}

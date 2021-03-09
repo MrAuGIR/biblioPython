@@ -12,3 +12,11 @@ def index(request):
 def detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     return render(request, 'biblio/detail.html', {'book':book})
+
+def authors(request):
+    authors = Auteur.objects.all()
+    return render(request, 'biblio/authors.html', {'authors':authors})
+
+def author_detail(request,id):
+    author = get_object_or_404(Auteur, pk=id)
+    return render(request, 'biblio/author_detail.html', {'author':author})

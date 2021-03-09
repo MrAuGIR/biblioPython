@@ -1,8 +1,33 @@
-<h1>{{ book.nom }}</h1>
-<ul>
-    <li>Auteur : {{ book.auteur }}</li>
-    <li>ISBN : {{ book.ISBN }}</li>
-</ul>
-    <p>{{ book.resume }}</p>
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ book.nom }}</h1>
+            <ul>
+                <li>Auteur : 
+                    {% for auteur in book.auteurs.all %}
+                        <span>{{auteur}}</span>,
+                    {% endfor %}
+                </li>
+                <li>ISBN : {{ book.ISBN }}</li>
+                <li>GENRE :
+                    {% for genre in book.genres.all %}
+                         <span>{{genre}}</span>
+                    {% endfor %}
+                </li>
+                <li>EDITION : {{ book.edition }}</li>
+            </ul>
+                <p>{{ book.resume }}</p>
+            <div class="picture">
+                <img style="height:100px"src="/media/{{book.image}}">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <a href="{% url 'biblio:index' %}">Retour</a>
+    </div>
+</div>
 
-    <a href="{% url 'biblio:index' %}">Retour</a>
+    
+{% endblock %}

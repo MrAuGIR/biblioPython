@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin"),
     # ajout des url de l'app biblio
     path('biblio/', include('biblio.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
